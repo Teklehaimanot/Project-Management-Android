@@ -1,8 +1,8 @@
 export const color = {
-  primary: "#0a66c2",
+  primary: "#20A8F7",
   white: "#ffffff",
-  //   black: "#000000",
   gray: "#EEEEEE",
   grayLight: "#A1A6B3",
   grayDark: "#a9a9a9",
+  statusbar: "#4CB6F3",
 };

@@ -6,11 +6,13 @@ import UserNavigator from "./UserNavigator";
 import TaskNavigator from "./TaskNavigator";
 import { Ionicons } from "@expo/vector-icons";
 import { color } from "../utilities/Colors";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createBottomTabNavigator();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={color.statusbar} barStyle="light-content" />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
@@ -32,7 +34,7 @@ const RootNavigator = () => {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: `${color.white}`,
+          tabBarActiveTintColor: `${color.gray}`,
           tabBarInactiveTintColor: `${color.grayDark}`,
           headerTintColor: `${color.white}`,
           headerStyle: {

@@ -1,11 +1,18 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 
+import ProjectList from "../screens/ProjectList";
+
+const Stack = createStackNavigator();
 const ProjectNavigator = () => {
   return (
-    <View>
-      <Text>Project navigator</Text>
-    </View>
+    <Stack.Navigator initialRouteName="Project-list">
+      <Stack.Screen
+        name="Project-List"
+        component={ProjectList}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 };
 
