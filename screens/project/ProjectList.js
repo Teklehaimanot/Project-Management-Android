@@ -32,7 +32,196 @@ const ProjectList = ({ navigation }) => {
                 { backgroundColor: true ? color.active : color.primary },
               ]}
             >
-              <Text style={styles.titleText}>Title</Text>
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
+            </View>
+            <View style={styles.descriptionStyle}>
+              <Text>This is a Description about project one</Text>
+            </View>
+            <View>
+              <Text>Wed, May 22, 2024, 12:00 PM</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Project-View", {
+                id: "1",
+                title: "tekle",
+                description: "description",
+                isActive: true,
+              })
+            }
+          >
+            <View
+              style={[
+                styles.titleStyle,
+                { backgroundColor: true ? color.active : color.primary },
+              ]}
+            >
+              <Text style={styles.titleText}>title</Text>
             </View>
             <View style={styles.descriptionStyle}>
               <Text>This is a Description about project one</Text>

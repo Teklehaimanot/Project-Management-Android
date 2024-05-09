@@ -1,8 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import ProjectList from "../screens/ProjectList";
 import ProjectView from "../screens/project/ProjectView";
+import ProjectList from "../screens/project/ProjectList";
 
 const Stack = createStackNavigator();
 const ProjectNavigator = () => {
