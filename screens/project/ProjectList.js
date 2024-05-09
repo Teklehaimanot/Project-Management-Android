@@ -242,19 +242,19 @@ const ProjectList = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.grayDark,
+    backgroundColor: color.statusbar,
   },
   scrollView: {
     flex: 1,
-    marginBottom: 15,
+    marginBottom: 40,
     width: width * 1,
   },
   cardView: {
     backgroundColor: color.white,
     width: width * 0.95,
-    marginTop: 15,
+    marginTop: 40,
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 5,
     alignSelf: "center",
   },
   titleStyle: {
