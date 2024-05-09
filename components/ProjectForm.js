@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { color } from "../utilities/Colors";
+import CheckBox from "./CheckBox";
 
 const { width } = Dimensions.get("window");
 
@@ -16,6 +17,7 @@ const ProjectForm = ({ project }) => {
   const [isChecked, setIsChecked] = useState(project.isActive);
   const [title, setTitle] = useState(project.title);
   const [description, setDescription] = useState(project.description);
+
   return (
     <View style={styles.cardView}>
       <View style={styles.inputContainer}>
@@ -38,7 +40,13 @@ const ProjectForm = ({ project }) => {
           value={description}
         />
       </View>
-      <View>
+      <CheckBox
+        isActive={project.isActive}
+        title={"Is Active"}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
+      {/* <View>
         <TouchableOpacity
           onPress={() => setIsChecked(!isChecked)}
           style={styles.checkBoxContainer}
@@ -50,7 +58,7 @@ const ProjectForm = ({ project }) => {
           />
           <Text style={styles.checkBoxLabel}> Is Active ?</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -74,17 +82,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: color.white,
     padding: 8,
-  },
-  checkBoxContainer: {
-    flexDirection: "row",
-    marginVertical: 15,
-    marginHorizontal: 5,
-  },
-  checkBoxLabel: {
-    color: color.white,
-    fontSize: 15,
-    fontWeight: "bold",
-    alignSelf: "center",
   },
 });
 export default ProjectForm;
