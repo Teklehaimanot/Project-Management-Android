@@ -3,9 +3,9 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { color } from "../utilities/Colors";
 
-const PlusButton = () => {
+const PlusButton = ({ handlePress }) => {
   return (
-    <TouchableOpacity style={styles.createButton}>
+    <TouchableOpacity style={styles.createButton} onPress={handlePress}>
       <Icon name="plus" size={20} color={color.white} />
     </TouchableOpacity>
   );

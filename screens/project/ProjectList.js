@@ -11,7 +11,7 @@ const ProjectList = ({ navigation }) => {
       <ScrollView style={styles.scrollView}>
         <ProjectCard navigation={navigation} />
       </ScrollView>
-      <PlusButton />
+      <PlusButton handlePress={() => navigation.navigate("Project-Add")} />
     </View>
   );
 };

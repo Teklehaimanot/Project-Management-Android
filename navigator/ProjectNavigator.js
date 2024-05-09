@@ -4,6 +4,7 @@ import ProjectView from "../screens/project/ProjectView";
 import ProjectList from "../screens/project/ProjectList";
 import { color } from "../utilities/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ProjectAdd from "../screens/project/ProjectAdd";
 
 const Stack = createStackNavigator();
 const ProjectNavigator = () => {
@@ -39,6 +40,13 @@ const ProjectNavigator = () => {
               style={{ marginRight: 10 }}
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name="Project-Add"
+        component={ProjectAdd}
+        options={{
+          title: " New Project ",
         }}
       />
     </Stack.Navigator>

@@ -36,10 +36,6 @@ const RootNavigator = () => {
           },
           tabBarActiveTintColor: `${color.gray}`,
           tabBarInactiveTintColor: `${color.grayDark}`,
-          // headerTintColor: `${color.white}`,
-          // headerStyle: {
-          //   backgroundColor: color.primary,
-          // },
           tabBarStyle: {
             backgroundColor: color.primary,
           },
