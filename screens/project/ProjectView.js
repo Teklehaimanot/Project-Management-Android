@@ -7,9 +7,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+
 import { color } from "../../utilities/Colors";
+import SaveButton from "../../components/SaveButton";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 const ProjectView = ({ route }) => {
@@ -60,9 +61,10 @@ const ProjectView = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity style={styles.updateButton} onPress={handleUpdate}>
+      <SaveButton handlePress={handleUpdate} />
+      {/* <TouchableOpacity style={styles.updateButton} onPress={handleUpdate}>
         <MaterialIcons name="check" size={28} color="#fff" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
