@@ -36,13 +36,14 @@ const RootNavigator = () => {
           },
           tabBarActiveTintColor: `${color.gray}`,
           tabBarInactiveTintColor: `${color.grayDark}`,
-          headerTintColor: `${color.white}`,
-          headerStyle: {
-            backgroundColor: color.primary,
-          },
+          // headerTintColor: `${color.white}`,
+          // headerStyle: {
+          //   backgroundColor: color.primary,
+          // },
           tabBarStyle: {
             backgroundColor: color.primary,
           },
+          headerShown: false,
         })}
       >
         <Tab.Screen name="Projects" component={ProjectNavigator} />

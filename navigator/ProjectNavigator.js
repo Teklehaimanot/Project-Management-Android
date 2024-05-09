@@ -2,20 +2,44 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProjectView from "../screens/project/ProjectView";
 import ProjectList from "../screens/project/ProjectList";
+import { color } from "../utilities/Colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const ProjectNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Project-list">
+    <Stack.Navigator
+      initialRouteName="Project-List"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: color.primary,
+        },
+        headerTintColor: color.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
       <Stack.Screen
         name="Project-List"
         component={ProjectList}
-        options={{ headerShown: false }}
+        options={{ title: "Projects" }}
       />
       <Stack.Screen
         name="Project-View"
         component={ProjectView}
-        options={{ headerShown: false }}
+        options={{
+          title: " ",
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="delete"
+              size={28}
+              color={color.white}
+              onPress={() => alert("This is a button!")}
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
