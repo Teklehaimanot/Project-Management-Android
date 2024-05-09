@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
 import { color } from "../utilities/Colors";
 import CheckBox from "./CheckBox";
 
@@ -46,19 +38,6 @@ const ProjectForm = ({ project }) => {
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
-      {/* <View>
-        <TouchableOpacity
-          onPress={() => setIsChecked(!isChecked)}
-          style={styles.checkBoxContainer}
-        >
-          <MaterialIcons
-            name={isChecked ? "check-box" : "check-box-outline-blank"}
-            size={28}
-            color={isChecked ? color.white : color.white}
-          />
-          <Text style={styles.checkBoxLabel}> Is Active ?</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };
