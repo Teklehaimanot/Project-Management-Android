@@ -1,11 +1,29 @@
+import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { View, Text } from "react-native";
+import { color } from "../utilities/Colors";
+import TaskList from "../screens/Task/TaskList";
 
 const TaskNavigator = () => {
+  const Stack = createStackNavigator();
   return (
-    <View>
-      <Text>Task Navigator</Text>
-    </View>
+    <Stack.Navigator
+      initialRouteName="Task-List"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: color.primary,
+        },
+        headerTintColor: color.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Task-List"
+        component={TaskList}
+        options={{ title: "Tasks" }}
+      />
+    </Stack.Navigator>
   );
 };
 

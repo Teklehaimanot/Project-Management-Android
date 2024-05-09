@@ -7,11 +7,12 @@ import {
   Dimensions,
 } from "react-native";
 import { color } from "../utilities/Colors";
+import CardBox from "./CardBox";
 
 const { width } = Dimensions.get("window");
 const ProjectCard = ({ navigation }) => {
   return (
-    <View style={styles.cardView}>
+    <CardBox>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Project-View", {
@@ -37,19 +38,11 @@ const ProjectCard = ({ navigation }) => {
           <Text>Wed, May 22, 2024, 12:00 PM</Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </CardBox>
   );
 };
 
 const styles = StyleSheet.create({
-  cardView: {
-    backgroundColor: color.white,
-    width: width * 0.95,
-    marginTop: 40,
-    padding: 15,
-    borderRadius: 5,
-    alignSelf: "center",
-  },
   titleStyle: {
     padding: 10,
     borderRadius: 5,
