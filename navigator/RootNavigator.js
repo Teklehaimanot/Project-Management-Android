@@ -34,8 +34,8 @@ const RootNavigator = () => {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: `${color.gray}`,
-          tabBarInactiveTintColor: `${color.grayDark}`,
+          tabBarActiveTintColor: `${color.white}`,
+          tabBarInactiveTintColor: `${color.grayLight}`,
           tabBarStyle: {
             backgroundColor: color.primary,
           },
