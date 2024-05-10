@@ -6,8 +6,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import TaskView from "../screens/Task/TaskView";
 import TaskAdd from "../screens/Task/TaskAdd";
 
+const Stack = createStackNavigator();
 const TaskNavigator = () => {
-  const Stack = createStackNavigator();
   return (
     <Stack.Navigator
       initialRouteName="Task-List"
