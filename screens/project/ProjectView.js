@@ -52,7 +52,6 @@ const ProjectView = ({ route, navigation }) => {
               margin: 40,
             }}
           >
-            {console.log(error)}
             {error?.data.error || "An error occured"}
           </Text>
         </View>

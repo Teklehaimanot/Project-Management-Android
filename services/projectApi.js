@@ -22,6 +22,14 @@ export const projectApi = createApi({
       query: () => `projects/get-projects`,
       providesTags: ["Project"],
     }),
+    createProject: builder.mutation({
+      query: (newProjectData) => ({
+        url: `projects/create-project`,
+        method: "POST",
+        body: newProjectData,
+      }),
+      invalidatesTags: ["Project"],
+    }),
     updateProject: builder.mutation({
       query: (updatedProjectData) => ({
         url: `projects/update-project`,
@@ -33,6 +41,8 @@ export const projectApi = createApi({
   }),
 });
 
-console.log("pro", projectApi.getProjects);
-
-export const { useGetProjectsQuery, useUpdateProjectMutation } = projectApi;
+export const {
+  useGetProjectsQuery,
+  useUpdateProjectMutation,
+  useCreateProjectMutation,
+} = projectApi;
