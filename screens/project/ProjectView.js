@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { color } from "../../utilities/Colors";
 import SaveButton from "../../components/SaveButton";
 import ProjectForm from "../../components/ProjectForm";
 import { useUpdateProjectMutation } from "../../services";
+import Loading from "../../components/Loading";
 
 const ProjectView = ({ route, navigation }) => {
   const project = route.params;
@@ -15,7 +15,13 @@ const ProjectView = ({ route, navigation }) => {
   const [updateProject, { isLoading, data, isSuccess, isError, error }] =
     useUpdateProjectMutation();
 
-  const handleUpdate = () => {
+  useEffect(() => {
+    if (isSuccess) {
+      navigation.navigate("Project-List");
+    }
+  }, [isSuccess, navigation]);
+
+  const handleUpdate = async () => {
     try {
       const updatedProjectData = {
         id: project.id,
@@ -23,15 +29,34 @@ const ProjectView = ({ route, navigation }) => {
         description: description,
         isActive: isChecked,
       };
-      updateProject(updatedProjectData);
-      navigation.navigate("Project-List");
+      await updateProject(updatedProjectData);
     } catch (error) {
       console.log(error);
     }
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <View style={styles.container}>
+      {isError && (
+        <View>
+          <Text
+            style={{
+              color: color.red,
+              fontWeight: "bold",
+              fontSize: 20,
+              alignSelf: "center",
+              margin: 40,
+            }}
+          >
+            {console.log(error)}
+            {error?.data.error || "An error occured"}
+          </Text>
+        </View>
+      )}
       <ProjectForm
         isChecked={isChecked}
         setIsChecked={setIsChecked}
