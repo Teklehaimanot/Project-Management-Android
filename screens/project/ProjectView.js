@@ -1,24 +1,14 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 
 import { color } from "../../utilities/Colors";
 import SaveButton from "../../components/SaveButton";
-import { MaterialIcons } from "@expo/vector-icons";
 import ProjectForm from "../../components/ProjectForm";
 
-const { width } = Dimensions.get("window");
 const ProjectView = ({ route }) => {
   const project = route.params;
 
   const handleUpdate = () => {
-    // Logic for updating data
     console.log("Update button pressed");
   };
 

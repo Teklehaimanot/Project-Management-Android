@@ -46,18 +46,33 @@ const TaskForm = ({ task }) => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Title</Text>
+        <Text style={styles.labelStyle}>Status</Text>
         <TextInput
-          placeholder="Project Title"
+          placeholder="Status"
           style={styles.textInput}
           onChangeText={(text) => setTitle(text)}
           value={title}
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Title</Text>
+        <DropdownInput options={options} onSelect={handleSelect} />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.labelStyle}>Tags</Text>
         <TextInput
-          placeholder="Project Title"
+          placeholder="Tags"
+          style={styles.textInput}
+          onChangeText={(text) => setTitle(text)}
+          value={title}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <DropdownInput options={options} onSelect={handleSelect} />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.labelStyle}>Due Date</Text>
+        <TextInput
+          placeholder="Due Date"
           style={styles.textInput}
           onChangeText={(text) => setTitle(text)}
           value={title}
@@ -72,7 +87,7 @@ const styles = StyleSheet.create({
     margin: "auto",
   },
   inputContainer: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
   labelStyle: {
     fontWeight: "bold",
@@ -81,7 +96,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginHorizontal: 5,
-    marginVertical: 7,
     borderRadius: 2,
     backgroundColor: color.white,
     padding: 8,

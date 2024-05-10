@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginHorizontal: 5,
-    marginVertical: 7,
+    marginVertical: 2,
     borderRadius: 2,
     backgroundColor: color.white,
     padding: 8,
