@@ -4,6 +4,7 @@ import { color } from "../utilities/Colors";
 import UserList from "../screens/user/UserList";
 import UserView from "../screens/user/UserView";
 import UserAdd from "../screens/user/UserAdd";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Stack = createStackNavigator();
 const UserNavigator = () => {
   return (
