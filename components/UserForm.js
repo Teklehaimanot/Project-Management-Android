@@ -1,98 +1,70 @@
 import React, { useState } from "react";
-import { Dimensions, StyleSheet, View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
 import { color } from "../utilities/Colors";
-import Draggable from "react-native-draggable";
 import DropdownInput from "./DropdownInput";
 
 const { width } = Dimensions.get("window");
-const TaskForm = ({ task }) => {
+const UserForm = ({ user }) => {
+  const [name, setName] = useState(user.name);
   const options = [
     { label: "Option 1", value: 1 },
     { label: "Option 2", value: 2 },
     { label: "Option 3", value: 3 },
   ];
-  const [isChecked, setIsChecked] = useState(task.isActive);
-  const [title, setTitle] = useState(task.title);
-  const [description, setDescription] = useState(task.description);
-
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedOption, setSelectedOption] = useState("Gender");
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
   return (
     <View style={styles.cardView}>
       <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Title</Text>
+        <Text style={styles.labelStyle}>Name</Text>
         <TextInput
-          placeholder="Project Title"
+          placeholder="Name"
           style={styles.textInput}
           onChangeText={(text) => setTitle(text)}
-          value={title}
+          value={name}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.labelStyle}>Email</Text>
+        <TextInput
+          placeholder="Email"
+          style={styles.textInput}
+          onChangeText={(text) => setTitle(text)}
+          value={name}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.labelStyle}>Phone Number</Text>
+        <TextInput
+          placeholder="Phone Number"
+          style={styles.textInput}
+          onChangeText={(text) => setTitle(text)}
+          value={name}
         />
       </View>
       <View style={styles.inputContainer}>
         <DropdownInput
           options={options}
           onSelect={handleSelect}
-          label={"Project"}
+          label={"Gender"}
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Description</Text>
+        <Text style={styles.labelStyle}>Job Title</Text>
         <TextInput
-          placeholder="Description"
-          style={styles.textInput}
-          multiline={true}
-          numberOfLines={4}
-          onChangeText={(text) => setDescription(text)}
-          value={description}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Status</Text>
-        <TextInput
-          placeholder="Status"
+          placeholder="JobTitle"
           style={styles.textInput}
           onChangeText={(text) => setTitle(text)}
-          value={title}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <DropdownInput
-          options={options}
-          onSelect={handleSelect}
-          label={"Assigned"}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Tags</Text>
-        <TextInput
-          placeholder="Tags"
-          style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
-          value={title}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <DropdownInput
-          options={options}
-          onSelect={handleSelect}
-          label={"Priority"}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Due Date</Text>
-        <TextInput
-          placeholder="Due Date"
-          style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
-          value={title}
+          value={name}
         />
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   cardView: {
     width: width * 0.95,
@@ -113,5 +85,4 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 });
-
-export default TaskForm;
+export default UserForm;

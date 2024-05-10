@@ -11,7 +11,7 @@ import {
 import { color } from "../utilities/Colors";
 
 const { width } = Dimensions.get("window");
-const DropdownInput = ({ options, onSelect }) => {
+const DropdownInput = ({ options, onSelect, label }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -23,6 +23,11 @@ const DropdownInput = ({ options, onSelect }) => {
 
   return (
     <View>
+      <Text
+        style={{ color: color.white, fontWeight: "bold", paddingHorizontal: 8 }}
+      >
+        {label}
+      </Text>
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
         style={styles.textInput}
