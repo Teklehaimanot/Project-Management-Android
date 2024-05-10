@@ -42,8 +42,7 @@ const ProjectList = ({ navigation }) => {
       </View>
     );
   }
-  console.log("isL", isLoading);
-  console.log(error);
+
   return (
     <View style={styles.container}>
       <ScrollView

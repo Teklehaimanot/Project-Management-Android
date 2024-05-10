@@ -5,11 +5,14 @@ import CheckBox from "./CheckBox";
 
 const { width } = Dimensions.get("window");
 
-const ProjectForm = ({ project }) => {
-  const [isChecked, setIsChecked] = useState(project.isActive);
-  const [title, setTitle] = useState(project.title);
-  const [description, setDescription] = useState(project.description);
-
+const ProjectForm = ({
+  isChecked,
+  setIsChecked,
+  title,
+  setTitle,
+  description,
+  setDescription,
+}) => {
   return (
     <View style={styles.cardView}>
       <View style={styles.inputContainer}>
@@ -33,7 +36,7 @@ const ProjectForm = ({ project }) => {
         />
       </View>
       <CheckBox
-        isActive={project.isActive}
+        isActive={isChecked}
         title={"Is Active"}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
