@@ -12,7 +12,6 @@ export const projectApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
-        console.log(token);
         headers.set("Authorization", `${token}`);
       }
     },
@@ -26,6 +25,6 @@ export const projectApi = createApi({
   }),
 });
 
-console.log("proj", projectApi.getProjects);
+console.log("pro", projectApi.getProjects);
 
 export const { useGetProjectsQuery } = projectApi;

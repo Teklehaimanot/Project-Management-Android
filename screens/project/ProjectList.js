@@ -1,46 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   ScrollView,
-  ActivityIndicator,
+  RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import { color } from "../../utilities/Colors";
 import PlusButton from "../../components/PlusButton";
 import ProjectCard from "../../components/ProjectCard";
 import { useGetProjectsQuery } from "../../services";
+import Loading from "../../components/Loading";
 
 const { width } = Dimensions.get("window");
 const ProjectList = ({ navigation }) => {
   const { data, error, isLoading, refetch } = useGetProjectsQuery();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <ActivityIndicator size="large" color={color.active} />
-      </View>
-    );
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
+  };
+
+  if (isLoading && !isRefreshing) {
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontSize: 18, color: color.red }}>
-          Error loading data. Please try again.
-        </Text>
-        <TouchableOpacity onPress={refetch}>
-          <Text style={{ color: color.blue, marginTop: 10 }}>Tap to retry</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <Error refetch={refetch} />;
   }
 
   console.log("dd", data.data[0]);
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={handleRefresh}
+            colors={[color.active]}
+          />
+        }
+      >
         {data?.data.map((project) => (
           <ProjectCard
             navigation={navigation}
