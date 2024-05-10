@@ -30,10 +30,20 @@ const ProjectList = ({ navigation }) => {
   }
 
   if (error) {
-    return <Error refetch={refetch} />;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 18, color: color.red }}>
+          Error loading data. Please try again.
+        </Text>
+        <TouchableOpacity onPress={refetch}>
+          <Text style={{ color: color.blue, marginTop: 10 }}>Tap to retry</Text>
+        </TouchableOpacity>
+        <Text style={{ color: color.red, marginTop: 10 }}>{error.message}</Text>
+      </View>
+    );
   }
-
-  console.log("dd", data.data[0]);
+  console.log("isL", isLoading);
+  console.log(error);
   return (
     <View style={styles.container}>
       <ScrollView

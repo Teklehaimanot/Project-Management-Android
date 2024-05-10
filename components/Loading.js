@@ -4,7 +4,13 @@ import { color } from "../utilities/Colors";
 
 const Loading = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        backgroundColor: color.statusbar,
+      }}
+    >
       <ActivityIndicator size="large" color={color.active} />
     </View>
   );
