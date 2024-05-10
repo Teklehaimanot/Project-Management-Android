@@ -3,7 +3,7 @@ import CardBox from "./CardBox";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { color } from "../utilities/Colors";
 
-const TaskCard = () => {
+const TaskCard = ({ navigation }) => {
   return (
     <CardBox>
       <TouchableOpacity
