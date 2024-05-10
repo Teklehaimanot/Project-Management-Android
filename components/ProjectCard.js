@@ -10,32 +10,34 @@ import { color } from "../utilities/Colors";
 import CardBox from "./CardBox";
 
 const { width } = Dimensions.get("window");
-const ProjectCard = ({ navigation }) => {
+const ProjectCard = ({ navigation, project }) => {
   return (
     <CardBox>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Project-View", {
-            id: "1",
-            title: "tekle",
-            description: "description",
-            isActive: true,
+            id: project.id,
+            title: project.title,
+            description: project.description,
+            isActive: project.isActive,
           })
         }
       >
         <View
           style={[
             styles.titleStyle,
-            { backgroundColor: true ? color.active : color.primary },
+            {
+              backgroundColor: project.isActive ? color.active : color.primary,
+            },
           ]}
         >
-          <Text style={styles.titleText}>title</Text>
+          <Text style={styles.titleText}>{project.title}</Text>
         </View>
         <View style={styles.descriptionStyle}>
-          <Text>This is a Description about project one</Text>
+          <Text>{project.description}</Text>
         </View>
         <View>
-          <Text>Wed, May 22, 2024, 12:00 PM</Text>
+          <Text>{project.createdAt}</Text>
         </View>
       </TouchableOpacity>
     </CardBox>
