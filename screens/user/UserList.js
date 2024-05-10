@@ -11,7 +11,7 @@ const UserList = ({ navigation }) => {
       <ScrollView style={styles.scrollView}>
         <UserCard navigation={navigation} />
       </ScrollView>
-      <PlusButton handlePress={() => navigation.navigate("Task-Add")} />
+      <PlusButton handlePress={() => navigation.navigate("User-Add")} />
     </View>
   );
 };

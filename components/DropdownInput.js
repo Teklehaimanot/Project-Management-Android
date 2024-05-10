@@ -88,9 +88,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   labelStyle: {
-    fontWeight: "bold",
-    padding: 6,
-    color: color.statusbar,
+    paddingVertical: 4,
+    color: color.grayDark,
   },
   textInput: {
     marginHorizontal: 5,

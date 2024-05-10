@@ -45,7 +45,7 @@ const UserNavigator = () => {
         name="User-Add"
         component={UserAdd}
         options={{
-          title: " New Task ",
+          title: " New User ",
         }}
       />
     </Stack.Navigator>
