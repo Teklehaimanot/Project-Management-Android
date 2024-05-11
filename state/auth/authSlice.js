@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { token } from "../../config";
+import { TOKEN_KEY } from "@env";
 
 const initialState = {
-  token: `${token}`,
+  token: `${TOKEN_KEY}`,
   isAuthenticated: false,
   loading: true,
   user: null,

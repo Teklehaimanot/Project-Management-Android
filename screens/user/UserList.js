@@ -5,6 +5,8 @@ import {
   Dimensions,
   ScrollView,
   RefreshControl,
+  Text,
+  TouchableOpacity,
 } from "react-native";
 import PlusButton from "../../components/PlusButton";
 import { color } from "../../utilities/Colors";

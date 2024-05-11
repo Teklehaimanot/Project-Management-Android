@@ -1,8 +1,8 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "../config";
+import { API_KEY } from "@env";
 
-const BASE_URL = baseUrl;
+const BASE_URL = API_KEY;
 
 console.log(BASE_URL);
 export const projectApi = createApi({
