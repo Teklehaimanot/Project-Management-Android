@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 import { color } from "../../utilities/Colors";
 import SaveButton from "../../components/SaveButton";
 import UserForm from "../../components/UserForm";
 import { useDeleteUserMutation, useUpdateUserMutation } from "../../services";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Loading from "../../components/Loading";
 
 const UserView = ({ route, navigation }) => {
@@ -25,6 +26,20 @@ const UserView = ({ route, navigation }) => {
     }
   }, [isSuccess, navigation]);
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={confirmDelete} style={styles.deleteButton}>
+          <MaterialCommunityIcons
+            name="delete"
+            size={28}
+            color={color.white}
+            style={{ marginRight: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   const handleUpdate = async () => {
     try {
       const updatedUserData = {
@@ -38,11 +53,38 @@ const UserView = ({ route, navigation }) => {
         isActive: user.isActive,
       };
       await updateUser(updatedUserData);
-      console.log("ud", updatedUserData);
     } catch (error) {
       console.log(error);
     }
   };
+  const confirmDelete = () => {
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to delete this project?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => handleDelete(user.id),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
+  const handleDelete = async (userId) => {
+    try {
+      await deleteUser(userId);
+      console.log("Project deleted successfully:", userId);
+      navigation.navigate("User-List");
+    } catch (error) {
+      console.log("Error deleting user:", error);
+    }
+  };
+
   if (isLoading || isDeleting) {
     return <Loading />;
   }

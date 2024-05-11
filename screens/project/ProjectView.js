@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { View, StyleSheet, Text, Alert } from "react-native";
+import { View, StyleSheet, Text, Alert, TouchableOpacity } from "react-native";
 import { color } from "../../utilities/Colors";
 import SaveButton from "../../components/SaveButton";
 import ProjectForm from "../../components/ProjectForm";
@@ -9,7 +9,6 @@ import {
 } from "../../services";
 import Loading from "../../components/Loading";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProjectView = ({ route, navigation }) => {
   const project = route.params;
@@ -30,7 +29,7 @@ const ProjectView = ({ route, navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={confirmDelete} style={styles.deleteButton}>
+        <TouchableOpacity onPress={confirmDelete}>
           <MaterialCommunityIcons
             name="delete"
             size={28}
