@@ -38,6 +38,13 @@ export const projectApi = createApi({
       }),
       invalidatesTags: ["Project"],
     }),
+    deleteProject: builder.mutation({
+      query: (projectId) => ({
+        url: `projects/delete-project/${projectId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Project"],
+    }),
   }),
 });
 
@@ -45,4 +52,5 @@ export const {
   useGetProjectsQuery,
   useUpdateProjectMutation,
   useCreateProjectMutation,
+  useDeleteProjectMutation,
 } = projectApi;

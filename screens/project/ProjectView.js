@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import { color } from "../../utilities/Colors";
 import SaveButton from "../../components/SaveButton";
 import ProjectForm from "../../components/ProjectForm";
-import { useUpdateProjectMutation } from "../../services";
+import {
+  useDeleteProjectMutation,
+  useUpdateProjectMutation,
+} from "../../services";
 import Loading from "../../components/Loading";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProjectView = ({ route, navigation }) => {
   const project = route.params;
@@ -14,12 +19,28 @@ const ProjectView = ({ route, navigation }) => {
 
   const [updateProject, { isLoading, data, isSuccess, isError, error }] =
     useUpdateProjectMutation();
+  const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
 
   useEffect(() => {
     if (isSuccess) {
       navigation.navigate("Project-List");
     }
   }, [isSuccess, navigation]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={confirmDelete} style={styles.deleteButton}>
+          <MaterialCommunityIcons
+            name="delete"
+            size={28}
+            color={color.white}
+            style={{ marginRight: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   const handleUpdate = async () => {
     try {
@@ -35,7 +56,35 @@ const ProjectView = ({ route, navigation }) => {
     }
   };
 
-  if (isLoading) {
+  const confirmDelete = () => {
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to delete this project?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => handleDelete(project.id),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
+  const handleDelete = async (projectId) => {
+    try {
+      await deleteProject(projectId);
+      console.log("Project deleted successfully:", projectId);
+      navigation.navigate("Project-List");
+    } catch (error) {
+      console.log("Error deleting user:", error);
+    }
+  };
+
+  if (isLoading || isDeleting) {
     return <Loading />;
   }
 

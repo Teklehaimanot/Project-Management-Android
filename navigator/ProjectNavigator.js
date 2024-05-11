@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ProjectView from "../screens/project/ProjectView";
 import ProjectList from "../screens/project/ProjectList";
 import { color } from "../utilities/Colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProjectAdd from "../screens/project/ProjectAdd";
 
 const Stack = createStackNavigator();
@@ -31,15 +30,6 @@ const ProjectNavigator = () => {
         component={ProjectView}
         options={{
           title: " ",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="delete"
-              size={28}
-              color={color.white}
-              onPress={() => alert("This is a button!")}
-              style={{ marginRight: 10 }}
-            />
-          ),
         }}
       />
       <Stack.Screen
