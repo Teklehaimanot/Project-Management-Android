@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { token } from "../../config";
+
 const initialState = {
-  token:
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4YjU5MjUxLTAwODEtNDA0Mi1hMTZiLTE5MmJkMDkwNzU2YyIsImlzQWRtaW4iOnRydWUsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwibmFtZSI6IkFkbWluIiwiZ2VuZGVyIjoibWFsZSIsImpvYlRpdGxlIjoiIiwicGhvbmVOdW1iZXIiOiIrMjUxMTExMTExMTExMSIsImlhdCI6MTcxNTQwNDk3NiwiZXhwIjoxNzE1NDA4NTc2fQ.sRYoTqRXvF_9HSh2TnsJ8tvvZj5eVF7Hk9vDmpD9vaE",
+  token: `${token}`,
   isAuthenticated: false,
   loading: true,
   user: null,
