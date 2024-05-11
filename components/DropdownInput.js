@@ -11,9 +11,14 @@ import {
 import { color } from "../utilities/Colors";
 
 const { width } = Dimensions.get("window");
-const DropdownInput = ({ options, onSelect, label }) => {
+const DropdownInput = ({
+  options,
+  onSelect,
+  label,
+  selectedOption,
+  setSelectedOption,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
@@ -33,7 +38,7 @@ const DropdownInput = ({ options, onSelect, label }) => {
         style={styles.textInput}
       >
         <Text style={styles.labelStyle}>
-          {selectedOption ? selectedOption.label : "Select an option"}
+          {selectedOption ? selectedOption : "Select an option"}
         </Text>
       </TouchableOpacity>
       <Modal
@@ -89,7 +94,6 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     paddingVertical: 4,
-    color: color.grayDark,
   },
   textInput: {
     marginHorizontal: 5,

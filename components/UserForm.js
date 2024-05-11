@@ -2,19 +2,32 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
 import { color } from "../utilities/Colors";
 import DropdownInput from "./DropdownInput";
+import CheckBox from "./CheckBox";
 
 const { width } = Dimensions.get("window");
-const UserForm = ({ user }) => {
-  const [name, setName] = useState(user.name);
+const UserForm = ({
+  name,
+  email,
+  phoneNumber,
+  gender,
+  jobTitle,
+  setName,
+  setEmail,
+  setPhoneNumber,
+  setGender,
+  setJobTitle,
+  password,
+  setPassword,
+}) => {
   const options = [
-    { label: "Option 1", value: 1 },
-    { label: "Option 2", value: 2 },
-    { label: "Option 3", value: 3 },
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" },
   ];
-  const [selectedOption, setSelectedOption] = useState("Gender");
+
   const handleSelect = (option) => {
-    setSelectedOption(option);
+    setGender(option.value);
   };
+
   return (
     <View style={styles.cardView}>
       <View style={styles.inputContainer}>
@@ -22,7 +35,7 @@ const UserForm = ({ user }) => {
         <TextInput
           placeholder="Name"
           style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
+          onChangeText={(text) => setName(text)}
           value={name}
         />
       </View>
@@ -31,8 +44,8 @@ const UserForm = ({ user }) => {
         <TextInput
           placeholder="Email"
           style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
-          value={name}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
         />
       </View>
 
@@ -41,15 +54,18 @@ const UserForm = ({ user }) => {
         <TextInput
           placeholder="Phone Number"
           style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
-          value={name}
+          onChangeText={(text) => setPhoneNumber(text)}
+          value={phoneNumber}
         />
       </View>
       <View style={styles.inputContainer}>
         <DropdownInput
+          selectedOption={gender}
+          setSelectedOption={setGender}
           options={options}
           onSelect={handleSelect}
           label={"Gender"}
+          value={gender?.value}
         />
       </View>
       <View style={styles.inputContainer}>
@@ -57,8 +73,17 @@ const UserForm = ({ user }) => {
         <TextInput
           placeholder="JobTitle"
           style={styles.textInput}
-          onChangeText={(text) => setTitle(text)}
-          value={name}
+          onChangeText={(text) => setJobTitle(text)}
+          value={jobTitle}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.labelStyle}>Password</Text>
+        <TextInput
+          placeholder="Password"
+          style={styles.textInput}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
         />
       </View>
     </View>

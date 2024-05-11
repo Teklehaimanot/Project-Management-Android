@@ -15,9 +15,16 @@ const UserCard = ({ navigation, user }) => {
             phoneNumber: user.phoneNumber,
             gender: user.gender,
             jobTitle: user.jobTitle,
+            isActive: user.isActive,
           })
         }
       >
+        <View
+          style={[
+            styles.isUserActive,
+            { borderColor: user.isActive ? color.active : color.primary },
+          ]}
+        ></View>
         <View style={styles.descriptionStyle}>
           <Text style={styles.labelStyle}>Name:</Text>
           <Text>{user.name}</Text>
@@ -29,6 +36,10 @@ const UserCard = ({ navigation, user }) => {
         <View style={styles.descriptionStyle}>
           <Text style={styles.labelStyle}>Gender:</Text>
           <Text> {user.gender}</Text>
+        </View>
+        <View style={styles.descriptionStyle}>
+          <Text style={styles.labelStyle}>Job Title:</Text>
+          <Text> {user.jobTitle}</Text>
         </View>
       </TouchableOpacity>
     </CardBox>
@@ -52,6 +63,10 @@ const styles = StyleSheet.create({
     color: color.primary,
     fontWeight: "bold",
     marginRight: 10,
+  },
+  isUserActive: {
+    borderWidth: 1,
+    marginVertical: 5,
   },
 });
 export default UserCard;
