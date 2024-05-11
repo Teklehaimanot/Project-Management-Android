@@ -1,44 +1,47 @@
 import React from "react";
 import CardBox from "./CardBox";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { color } from "../utilities/Colors";
 
-const TaskCard = ({ navigation }) => {
+const { width } = Dimensions.get("window");
+const TaskCard = ({ navigation, task }) => {
   return (
     <CardBox>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Task-View", {
-            id: "1",
-            title: "tekle",
-            description: "description",
-            isActive: true,
+            id: task.id,
+            title: task.title,
+            description: task.description,
+            projectId: task.projectId,
+            status: task.status,
+            assigneeId: task.assigneeId,
+            tags: task.tags,
+            priority: task.priority,
+            dueDate: task.dueDate,
           })
         }
       >
         <View style={styles.descriptionStyle}>
-          <Text>title</Text>
+          <Text>{task.title}</Text>
         </View>
         <View style={styles.descriptionStyle}>
-          <Text>project Name</Text>
+          <Text>{task.description}</Text>
         </View>
         <View style={styles.descriptionStyle}>
-          <Text>Description about a Task</Text>
+          <Text>{task.status}</Text>
         </View>
         <View style={styles.descriptionStyle}>
-          <Text>status</Text>
+          <Text>{task.priority}</Text>
         </View>
         <View style={styles.descriptionStyle}>
-          <Text>Tags</Text>
-        </View>
-        <View style={styles.descriptionStyle}>
-          <Text>assigned</Text>
-        </View>
-        <View style={styles.descriptionStyle}>
-          <Text>priority</Text>
-        </View>
-        <View>
-          <Text>Due Date: May 22, 2024</Text>
+          <Text>Due Date: {task.dueDate}</Text>
         </View>
       </TouchableOpacity>
     </CardBox>
@@ -52,10 +55,16 @@ const styles = StyleSheet.create({
   },
 
   descriptionStyle: {
+    flexDirection: "row",
     marginVertical: 5,
     paddingBottom: 10,
     borderBottomColor: color.grayDark,
     borderBottomWidth: 1,
+  },
+  labelStyle: {
+    color: color.primary,
+    fontWeight: "bold",
+    marginRight: 10,
   },
 });
 export default TaskCard;
