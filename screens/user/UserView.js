@@ -14,7 +14,6 @@ const UserView = ({ route, navigation }) => {
   const [jobTitle, setJobTitle] = useState(user.jobTitle);
   const [selectedOption, setSelectedOption] = useState(user.gender);
   const [password, setPassword] = useState("");
-  const [isChecked, setIsChecked] = useState(user.isActive);
 
   const [updateUser, { isLoading, data, isSuccess, isError, error }] =
     useUpdateUserMutation();
@@ -36,7 +35,7 @@ const UserView = ({ route, navigation }) => {
         gender: selectedOption,
         jobTitle,
         password,
-        isActive: isChecked,
+        isActive: user.isActive,
       };
       await updateUser(updatedUserData);
       console.log("ud", updatedUserData);

@@ -20,8 +20,8 @@ const UserForm = ({
   setPassword,
 }) => {
   const options = [
-    { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" },
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
   ];
 
   const handleSelect = (option) => {
