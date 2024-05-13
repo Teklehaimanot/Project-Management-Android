@@ -1,12 +1,145 @@
-import React from "react";
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 
-const Login = () => {
+import { TextInput } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import { API_KEY } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { color } from "../../utilities/Colors";
+import { login } from "../../state/auth/authSlice";
+
+const { width } = Dimensions.get("window");
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const basicUrl = API_KEY;
+
+  const handleSubmit = async (e) => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(`${basicUrl}/api/v1/user/login`, {
+        email,
+        password,
+      });
+      if (data) {
+        const { user, token } = data;
+        const jsonUser = JSON.stringify(data);
+        console.log(jsonUser);
+        AsyncStorage.setItem("token", jsonUser);
+        setErrors(false);
+        setIsLoading(false);
+        dispatch(login({ user, token }));
+        navigation.navigate("Home");
+      }
+    } catch (error) {
+      if (error.response) {
+        setErrors(error.response.data.error);
+        setIsLoading(false);
+      } else {
+        alert("Error setting up the request:", error.message);
+      }
+    }
+  };
   return (
-    <View>
-      <Text>Login</Text>
+    <View style={styles.container}>
+      <View style={styles.loginCard}>
+        <Text
+          style={{
+            color: color.error,
+          }}
+        >
+          {errors}
+        </Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            color: color.blueGray,
+            paddingHorizontal: 5,
+            fontSize: 20,
+          }}
+        >
+          Login
+        </Text>
+        <TextInput
+          placeholder="Email"
+          style={styles.textInput}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+        />
+        <TextInput
+          placeholder="Password"
+          style={styles.textInput}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
+        />
+        <Pressable style={styles.button} onPress={handleSubmit}>
+          {isLoading ? (
+            <ActivityIndicator size="small" color={color.white} />
+          ) : (
+            <Text
+              style={{
+                color: color.white,
+                fontWeight: "bold",
+                fontSize: 15,
+                textAlign: "center",
+                letterSpacing: 1,
+              }}
+            >
+              Login
+            </Text>
+          )}
+        </Pressable>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginCard: {
+    width: width * 0.88,
+    marginHorizontal: width * 0.06,
+    backgroundColor: color.grayBackground,
+    borderRadius: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
+  textInput: {
+    padding: 8,
+    marginHorizontal: 5,
+    marginVertical: 7,
+    borderRadius: 5,
+    backgroundColor: color.white,
+  },
+  button: {
+    backgroundColor: color.primary,
+    margin: 5,
+    borderRadius: 5,
+    paddingVertical: 14,
+  },
+  createAccount: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+    marginVertical: 10,
+    alignItems: "center",
+  },
+});
 
 export default Login;
