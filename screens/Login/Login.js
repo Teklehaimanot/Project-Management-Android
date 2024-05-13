@@ -5,19 +5,21 @@ import {
   Dimensions,
   Pressable,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 
 import { TextInput } from "react-native-gesture-handler";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { API_KEY } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { color } from "../../utilities/Colors";
 import { login } from "../../state/auth/authSlice";
+import { storeUser } from "../../utilities/StoreUser";
 
 const { width } = Dimensions.get("window");
-const Login = ({ navigation }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -28,23 +30,22 @@ const Login = ({ navigation }) => {
   const handleSubmit = async (e) => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post(`${basicUrl}/api/v1/user/login`, {
-        email,
-        password,
+      console.log(basicUrl);
+      const { data } = await axios.post(`${basicUrl}auth/login`, {
+        email: email,
+        password: password,
       });
       if (data) {
-        const { user, token } = data;
-        const jsonUser = JSON.stringify(data);
-        console.log(jsonUser);
-        AsyncStorage.setItem("token", jsonUser);
+        const { profile, accessToken } = data;
+        const jsonUser = { user: profile, token: accessToken };
+        await storeUser(jsonUser);
         setErrors(false);
         setIsLoading(false);
-        dispatch(login({ user, token }));
-        navigation.navigate("Home");
+        dispatch(login({ user: profile, token: `Bearer ${accessToken}` }));
       }
     } catch (error) {
       if (error.response) {
-        setErrors(error.response.data.error);
+        setErrors(error.response.data?.message.toString());
         setIsLoading(false);
       } else {
         alert("Error setting up the request:", error.message);
@@ -56,7 +57,8 @@ const Login = ({ navigation }) => {
       <View style={styles.loginCard}>
         <Text
           style={{
-            color: color.error,
+            color: color.red,
+            marginVertical: 10,
           }}
         >
           {errors}
@@ -84,7 +86,7 @@ const Login = ({ navigation }) => {
           value={password}
           secureTextEntry={true}
         />
-        <Pressable style={styles.button} onPress={handleSubmit}>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           {isLoading ? (
             <ActivityIndicator size="small" color={color.white} />
           ) : (
@@ -100,7 +102,7 @@ const Login = ({ navigation }) => {
               Login
             </Text>
           )}
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

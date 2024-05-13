@@ -16,6 +16,7 @@ const VerifyUserNavigator = () => {
         headerTintColor: color.white,
         headerTitleStyle: {
           fontWeight: "bold",
+          letterSpacing: 2,
         },
       }}
     >
