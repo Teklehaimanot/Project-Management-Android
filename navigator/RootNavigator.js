@@ -1,51 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ProjectNavigator from "./ProjectNavigator";
-import UserNavigator from "./UserNavigator";
-import TaskNavigator from "./TaskNavigator";
-import { Ionicons } from "@expo/vector-icons";
 import { color } from "../utilities/Colors";
 import { StatusBar } from "expo-status-bar";
+import HomeNavigator from "./HomeNavigator";
+import VerifyUserNavigator from "./VerifyUserNavigator";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const RootNavigator = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUser()
+      .then((res) => {
+        const { user, token } = JSON.parse(res);
+        if (res) {
+          dispatch(login({ user, token }));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const getUser = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      return token;
+    } catch (error) {
+      console.error("Error retrieving token:", error);
+      return null;
+    }
+  };
+  const renderStack = () => {
+    if (user) {
+      return <HomeNavigator />;
+    } else {
+      return <VerifyUserNavigator />;
+    }
+  };
+
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={color.statusbar} barStyle="light-content" />
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ color, size }) => {
-            let iconName;
-
-            switch (route.name) {
-              case "Projects":
-                iconName = "folder";
-                break;
-              case "Tasks":
-                iconName = "document";
-                break;
-              case "Users":
-                iconName = "people-outline";
-                break;
-              default:
-                iconName = "ios-information-circle";
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: `${color.white}`,
-          tabBarInactiveTintColor: `${color.grayLight}`,
-          tabBarStyle: {
-            backgroundColor: color.primary,
-          },
-          headerShown: false,
-        })}
-      >
-        <Tab.Screen name="Projects" component={ProjectNavigator} />
-        <Tab.Screen name="Tasks" component={TaskNavigator} />
-        <Tab.Screen name="Users" component={UserNavigator} />
-      </Tab.Navigator>
+      {renderStack()}
     </NavigationContainer>
   );
 };
