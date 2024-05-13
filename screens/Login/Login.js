@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Pressable,
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
@@ -11,7 +10,6 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import { useState } from "react";
 import { API_KEY } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { color } from "../../utilities/Colors";

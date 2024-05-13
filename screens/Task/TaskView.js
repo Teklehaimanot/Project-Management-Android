@@ -93,7 +93,6 @@ const TaskView = ({ route, navigation }) => {
     return <Loading />;
   }
 
-  console.log(task.id);
   return (
     <View style={styles.container}>
       {isError && (

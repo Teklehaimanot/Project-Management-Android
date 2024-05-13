@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { removeUser } from "../../utilities/StoreUser";
 import { logout } from "../../state/auth/authSlice";
+import StaffTaskCard from "../../components/StaffTaskCard";
 
 const { width } = Dimensions.get("window");
 const StaffTaskList = ({ navigation }) => {
@@ -82,7 +83,7 @@ const StaffTaskList = ({ navigation }) => {
         }
       >
         {data?.data.map((task) => (
-          <TaskCard navigation={navigation} key={task.id} task={task} />
+          <StaffTaskCard navigation={navigation} key={task.id} task={task} />
         ))}
       </ScrollView>
     </View>
