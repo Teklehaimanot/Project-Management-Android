@@ -11,6 +11,15 @@ import CardBox from "./CardBox";
 
 const { width } = Dimensions.get("window");
 const ProjectCard = ({ navigation, project }) => {
+  const formatDateToYYYYMMDD = (date) => {
+    const dateObject = new Date(date);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const day = String(dateObject.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <CardBox>
       <TouchableOpacity
@@ -37,7 +46,7 @@ const ProjectCard = ({ navigation, project }) => {
           <Text>{project.description}</Text>
         </View>
         <View>
-          <Text>{project.createdAt}</Text>
+          <Text>{formatDateToYYYYMMDD(project.createdAt)}</Text>
         </View>
       </TouchableOpacity>
     </CardBox>
