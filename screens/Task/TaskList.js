@@ -6,6 +6,7 @@ import {
   Dimensions,
   Text,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import PlusButton from "../../components/PlusButton";
 import { color } from "../../utilities/Colors";
@@ -41,7 +42,7 @@ const TaskList = ({ navigation }) => {
       </View>
     );
   }
-  console.log(data?.data[0]);
+
   return (
     <View style={styles.container}>
       <ScrollView

@@ -22,6 +22,10 @@ export const projectApi = createApi({
       query: () => `projects/get-projects`,
       providesTags: ["Project"],
     }),
+    getProjectById: builder.query({
+      query: (projectId) => `projects/get-project/${projectId}`,
+      providesTags: ["Project"],
+    }),
     createProject: builder.mutation({
       query: (newProjectData) => ({
         url: `projects/create-project`,
@@ -53,4 +57,5 @@ export const {
   useUpdateProjectMutation,
   useCreateProjectMutation,
   useDeleteProjectMutation,
+  useGetProjectByIdQuery,
 } = projectApi;

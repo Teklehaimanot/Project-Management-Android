@@ -21,6 +21,7 @@ const DropdownInput = ({
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSelect = (option) => {
+    console.log(option);
     setSelectedOption(option);
     setModalVisible(false);
     onSelect(option);

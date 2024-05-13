@@ -21,35 +21,35 @@ export const taskApi = createApi({
       query: () => `tasks/get-tasks`,
       providesTags: ["Task"],
     }),
-    // createTask: builder.mutation({
-    //   query: (newTaskData) => ({
-    //     url: `tasks/create-tasks`,
-    //     method: "POST",
-    //     body: newTaskData,
-    //   }),
-    //   invalidatesTags: ["Task"],
-    // }),
-    // updateTask: builder.mutation({
-    //   query: (updatedTaskData) => ({
-    //     url: `tasks/update-user`,
-    //     method: "PUT",
-    //     body: updatedTaskData,
-    //   }),
-    //   invalidatesTags: ["Task"],
-    // }),
-    // deleteUser: builder.mutation({
-    //   query: (taskId) => ({
-    //     url: `tasks/delete-user/${taskId}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["Task"],
-    // }),
+    createTask: builder.mutation({
+      query: (newTaskData) => ({
+        url: `tasks/create-task`,
+        method: "POST",
+        body: newTaskData,
+      }),
+      invalidatesTags: ["Task"],
+    }),
+    updateTask: builder.mutation({
+      query: (updatedTaskData) => ({
+        url: `tasks/update-task`,
+        method: "PUT",
+        body: updatedTaskData,
+      }),
+      invalidatesTags: ["Task"],
+    }),
+    deleteTask: builder.mutation({
+      query: (taskId) => ({
+        url: `tasks/delete-task/${taskId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Task"],
+    }),
   }),
 });
 
 export const {
   useGetTasksQuery,
-  //   useCreateTaskMutation,
-  //   useDeleteUserMutation,
-  //   useUpdateTaskMutation,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+  useDeleteTaskMutation,
 } = taskApi;

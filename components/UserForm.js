@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import { color } from "../utilities/Colors";
 import DropdownInput from "./DropdownInput";
 import CheckBox from "./CheckBox";
@@ -29,64 +36,66 @@ const UserForm = ({
   };
 
   return (
-    <View style={styles.cardView}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Name</Text>
-        <TextInput
-          placeholder="Name"
-          style={styles.textInput}
-          onChangeText={(text) => setName(text)}
-          value={name}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Email</Text>
-        <TextInput
-          placeholder="Email"
-          style={styles.textInput}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-        />
-      </View>
+    <ScrollView>
+      <View style={styles.cardView}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelStyle}>Name</Text>
+          <TextInput
+            placeholder="Name"
+            style={styles.textInput}
+            onChangeText={(text) => setName(text)}
+            value={name}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelStyle}>Email</Text>
+          <TextInput
+            placeholder="Email"
+            style={styles.textInput}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Phone Number</Text>
-        <TextInput
-          placeholder="Phone Number"
-          style={styles.textInput}
-          onChangeText={(text) => setPhoneNumber(text)}
-          value={phoneNumber}
-        />
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelStyle}>Phone Number</Text>
+          <TextInput
+            placeholder="Phone Number"
+            style={styles.textInput}
+            onChangeText={(text) => setPhoneNumber(text)}
+            value={phoneNumber}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <DropdownInput
+            selectedOption={gender}
+            setSelectedOption={setGender}
+            options={options}
+            onSelect={handleSelect}
+            label={"Gender"}
+            value={gender?.value}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelStyle}>Job Title</Text>
+          <TextInput
+            placeholder="JobTitle"
+            style={styles.textInput}
+            onChangeText={(text) => setJobTitle(text)}
+            value={jobTitle}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelStyle}>Password</Text>
+          <TextInput
+            placeholder="Password"
+            style={styles.textInput}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+          />
+        </View>
       </View>
-      <View style={styles.inputContainer}>
-        <DropdownInput
-          selectedOption={gender}
-          setSelectedOption={setGender}
-          options={options}
-          onSelect={handleSelect}
-          label={"Gender"}
-          value={gender?.value}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Job Title</Text>
-        <TextInput
-          placeholder="JobTitle"
-          style={styles.textInput}
-          onChangeText={(text) => setJobTitle(text)}
-          value={jobTitle}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.labelStyle}>Password</Text>
-        <TextInput
-          placeholder="Password"
-          style={styles.textInput}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-        />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
