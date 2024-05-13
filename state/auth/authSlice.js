@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TOKEN_KEY } from "@env";
 
-console.log(TOKEN_KEY);
 const initialState = {
   token: null,
   isAuthenticated: false,

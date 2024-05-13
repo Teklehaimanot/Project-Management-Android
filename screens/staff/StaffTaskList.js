@@ -1,29 +1,38 @@
 import React, { useLayoutEffect, useState } from "react";
 import {
   View,
+  Text,
   StyleSheet,
   Dimensions,
-  ScrollView,
   RefreshControl,
-  Text,
   TouchableOpacity,
 } from "react-native";
-import PlusButton from "../../components/PlusButton";
-import { color } from "../../utilities/Colors";
-import UserCard from "../../components/UserCard";
+import { useGetTasksQuery } from "../../services";
 import Loading from "../../components/Loading";
-import { useGetUsersQuery } from "../../services";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { logout } from "../../state/auth/authSlice";
+import { ScrollView } from "react-native-gesture-handler";
+import TaskCard from "../../components/TaskCard";
+import { color } from "../../utilities/Colors";
 import { useDispatch, useSelector } from "react-redux";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { removeUser } from "../../utilities/StoreUser";
+import { logout } from "../../state/auth/authSlice";
 
 const { width } = Dimensions.get("window");
-const UserList = ({ navigation }) => {
+const StaffTaskList = ({ navigation }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { data, error, isLoading, refetch } = useGetUsersQuery();
+  const { data, error, isLoading, refetch } = useGetTasksQuery();
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
+  };
+
+  if (isLoading && !isRefreshing) {
+    return <Loading />;
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -47,17 +56,6 @@ const UserList = ({ navigation }) => {
       ),
     });
   }, [navigation]);
-
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    await refetch();
-    setIsRefreshing(false);
-  };
-
-  if (isLoading && !isRefreshing) {
-    return <Loading />;
-  }
-
   if (error) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -71,7 +69,6 @@ const UserList = ({ navigation }) => {
       </View>
     );
   }
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -84,11 +81,10 @@ const UserList = ({ navigation }) => {
           />
         }
       >
-        {data?.data.map((user) => (
-          <UserCard navigation={navigation} key={user.id} user={user} />
+        {data?.data.map((task) => (
+          <TaskCard navigation={navigation} key={task.id} task={task} />
         ))}
       </ScrollView>
-      <PlusButton handlePress={() => navigation.navigate("User-Add")} />
     </View>
   );
 };
@@ -113,4 +109,4 @@ const styles = StyleSheet.create({
     color: color.white,
   },
 });
-export default UserList;
+export default StaffTaskList;

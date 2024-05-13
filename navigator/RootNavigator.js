@@ -7,6 +7,7 @@ import HomeNavigator from "./HomeNavigator";
 import VerifyUserNavigator from "./VerifyUserNavigator";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import StaffNavigator from "./StaffNavigator";
 
 const Tab = createBottomTabNavigator();
 const RootNavigator = () => {
@@ -37,7 +38,10 @@ const RootNavigator = () => {
   };
   const renderStack = () => {
     if (user) {
-      return <HomeNavigator />;
+      console.log("user", user);
+      if (user.isAdmin) {
+        return <HomeNavigator />;
+      } else return <StaffNavigator />;
     } else {
       return <VerifyUserNavigator />;
     }

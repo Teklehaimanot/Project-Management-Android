@@ -55,24 +55,8 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <View style={styles.loginCard}>
-        <Text
-          style={{
-            color: color.red,
-            marginVertical: 10,
-          }}
-        >
-          {errors}
-        </Text>
-        <Text
-          style={{
-            fontWeight: "bold",
-            color: color.blueGray,
-            paddingHorizontal: 5,
-            fontSize: 20,
-          }}
-        >
-          Login
-        </Text>
+        <Text style={styles.loginError}>{errors}</Text>
+        <Text style={styles.loginLabel}>Login</Text>
         <TextInput
           placeholder="Email"
           style={styles.textInput}
@@ -113,6 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: color.statusbar,
   },
   loginCard: {
     width: width * 0.88,
@@ -141,6 +126,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
     alignItems: "center",
+  },
+  loginLabel: {
+    fontWeight: "bold",
+    color: color.white,
+    paddingHorizontal: 5,
+    fontSize: 20,
+  },
+  loginError: {
+    color: color.red,
+    marginVertical: 10,
   },
 });
 
