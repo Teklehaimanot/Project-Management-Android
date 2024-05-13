@@ -6,8 +6,8 @@ import { StatusBar } from "expo-status-bar";
 import HomeNavigator from "./HomeNavigator";
 import VerifyUserNavigator from "./VerifyUserNavigator";
 import { useDispatch, useSelector } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import StaffNavigator from "./StaffNavigator";
+import { getUser } from "../utilities/StoreUser";
 
 const Tab = createBottomTabNavigator();
 const RootNavigator = () => {
@@ -17,7 +17,6 @@ const RootNavigator = () => {
   useEffect(() => {
     getUser()
       .then((res) => {
-        const { user, token } = JSON.parse(res);
         if (res) {
           dispatch(login({ user, token }));
         }
@@ -27,15 +26,6 @@ const RootNavigator = () => {
       });
   }, []);
 
-  const getUser = async () => {
-    try {
-      const token = await AsyncStorage.getItem("token");
-      return token;
-    } catch (error) {
-      console.error("Error retrieving token:", error);
-      return null;
-    }
-  };
   const renderStack = () => {
     if (user) {
       console.log("user", user);
