@@ -3,6 +3,7 @@ import { TOKEN_KEY } from "@env";
 
 const initialState = {
   token: null,
+  refreshToken: null,
   isAuthenticated: false,
   loading: true,
   user: null,
@@ -16,6 +17,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.refreshToken = action.payload.refreshToken;
     },
     logout: (state) => {
       state.isAuthenticated = false;

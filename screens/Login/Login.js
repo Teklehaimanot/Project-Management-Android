@@ -34,12 +34,22 @@ const Login = () => {
         password: password,
       });
       if (data) {
-        const { profile, accessToken } = data;
-        const jsonUser = { user: profile, token: accessToken };
+        const { profile, accessToken, refreshToken } = data;
+        const jsonUser = {
+          user: profile,
+          token: accessToken,
+          refreshToken: refreshToken,
+        };
         await storeUser(jsonUser);
         setErrors(false);
         setIsLoading(false);
-        dispatch(login({ user: profile, token: `Bearer ${accessToken}` }));
+        dispatch(
+          login({
+            user: profile,
+            token: `Bearer ${accessToken}`,
+            refreshToken: refreshToken,
+          })
+        );
       }
     } catch (error) {
       if (error.response) {
