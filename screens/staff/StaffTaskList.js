@@ -7,7 +7,7 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from "react-native";
-import { useGetTasksQuery } from "../../services";
+import { useGetTasksQuery, useGetUserTasksQuery } from "../../services";
 import Loading from "../../components/Loading";
 import { ScrollView } from "react-native-gesture-handler";
 import TaskCard from "../../components/TaskCard";
@@ -22,7 +22,8 @@ const { width } = Dimensions.get("window");
 const StaffTaskList = ({ navigation }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { data, error, isLoading, refetch } = useGetTasksQuery();
+  const { data, error, isLoading, refetch } = useGetUserTasksQuery(user.id);
+
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleRefresh = async () => {
@@ -30,11 +31,6 @@ const StaffTaskList = ({ navigation }) => {
     await refetch();
     setIsRefreshing(false);
   };
-
-  if (isLoading && !isRefreshing) {
-    return <Loading />;
-  }
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -57,6 +53,10 @@ const StaffTaskList = ({ navigation }) => {
       ),
     });
   }, [navigation]);
+  if (isLoading && !isRefreshing) {
+    return <Loading />;
+  }
+
   if (error) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -67,6 +67,23 @@ const StaffTaskList = ({ navigation }) => {
           <Text style={{ color: color.blue, marginTop: 10 }}>Tap to retry</Text>
         </TouchableOpacity>
         <Text style={{ color: color.red, marginTop: 10 }}>{error.message}</Text>
+      </View>
+    );
+  }
+
+  if (data?.data.length == 0) {
+    return (
+      <View style={{ backgroundColor: color.statusbar, flex: 1 }}>
+        <Text
+          style={{
+            margin: "auto",
+            fontSize: 15,
+            color: color.white,
+            fontWeight: "bold",
+          }}
+        >
+          You don't have any tasks assigned to you.
+        </Text>
       </View>
     );
   }

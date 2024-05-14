@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { color } from "../utilities/Colors";
 import { StatusBar } from "expo-status-bar";
 import HomeNavigator from "./HomeNavigator";
@@ -8,39 +7,52 @@ import VerifyUserNavigator from "./VerifyUserNavigator";
 import { useDispatch, useSelector } from "react-redux";
 import StaffNavigator from "./StaffNavigator";
 import { getUser } from "../utilities/StoreUser";
+import { login } from "../state/auth/authSlice";
+import Loading from "../components/Loading";
 
-const Tab = createBottomTabNavigator();
 const RootNavigator = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
+  const [loading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getUser()
-      .then((res) => {
-        if (res) {
-          dispatch(login({ user, token }));
+    const checkUserAndToken = async () => {
+      try {
+        const storedUser = await getUser();
+        if (storedUser) {
+          dispatch(
+            login({
+              user: storedUser.user,
+              token: `Bearer ${storedUser.token}`,
+            })
+          );
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      } catch (error) {
+        console.error("Error retrieving user from storage:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkUserAndToken();
   }, []);
 
-  const renderStack = () => {
-    if (user) {
-      console.log("user", user);
-      if (user.isAdmin) {
-        return <HomeNavigator />;
-      } else return <StaffNavigator />;
-    } else {
-      return <VerifyUserNavigator />;
-    }
-  };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={color.statusbar} barStyle="light-content" />
-      {renderStack()}
+      {user ? (
+        user.isAdmin ? (
+          <HomeNavigator />
+        ) : (
+          <StaffNavigator />
+        )
+      ) : (
+        <VerifyUserNavigator />
+      )}
     </NavigationContainer>
   );
 };
