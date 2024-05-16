@@ -58,6 +58,7 @@ const Login = () => {
         setIsLoading(false);
       } else {
         alert("Error setting up the request:", error.message);
+        setIsLoading(false);
       }
     }
   };
