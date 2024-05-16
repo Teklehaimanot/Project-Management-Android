@@ -52,6 +52,7 @@ const Login = () => {
         );
       }
     } catch (error) {
+      console.log(error);
       if (error.response) {
         setErrors(error.response.data?.message.toString());
         setIsLoading(false);
@@ -60,6 +61,8 @@ const Login = () => {
       }
     }
   };
+
+  console.log(errors);
   return (
     <View style={styles.container}>
       <View style={styles.loginCard}>
